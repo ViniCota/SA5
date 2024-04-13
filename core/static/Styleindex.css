@@ -1,0 +1,9 @@
+body {
+    padding-top: 60px; /* Para dar espaço ao header fixo */
+  }
+  .search-section {
+    margin-bottom: 20px;
+  }
+  .pessoas-section li {
+    margin-bottom: 20px;
+  }

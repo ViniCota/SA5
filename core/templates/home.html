@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <header class="fixed-top bg-dark">
+    <nav class="navbar navbar-dark">
+      <a class="navbar-brand" href="/core">Inicio</a>
+    </nav>
+  </header>
+
+  <div class="container mt-5">
+    <ul class="list-group">
+      {% for pessoa in pessoas %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ pessoa.nome }}
+        <div class="btn-group" role="group">
+          <a href="{% url 'editar' pessoa.id %}" class="btn btn-primary btn-sm">Editar</a>
+          <a href="{% url 'deletar' pessoa.id %}" class="btn btn-danger btn-sm">Deletar</a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <form action="{% url 'criar' %}" method="POST" class="mt-4">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="dataNasc">Data de Nascimento:</label>
+        <input type="date" id="dataNasc" name="dataNasc" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="paisDesejado">País Desejado:</label>
+        <input type="text" id="paisDesejado" name="paisDesejado" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-success">Salvar</button>
+    </form>
+  </div>
+</body>
+</html>

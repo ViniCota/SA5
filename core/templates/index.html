@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 60px; /* Para dar espaço ao header fixo */
+    }
+    .search-section {
+      margin-bottom: 20px;
+    }
+    .pessoas-section li {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header class="fixed-top bg-dark">
+    <nav class="navbar navbar-dark">
+      <a class="navbar-brand" href="/core/home">Cadastro</a>
+    </nav>
+  </header>
+
+  <main class="container mt-5">
+    <section class="search-section">
+      <div class="d-flex justify-content-between align-items-center">
+        <form action="{% url 'pesquisar' %}" method="GET" class="d-flex align-items-center">
+          {% csrf_token %}
+          <label for="nomePesquisa">Pesquisa:</label>
+          <input type="text" id="nomePesquisa" required name="nomePesquisa" class="form-control mr-2">
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+        <form action="{% url 'mostrarTodes' %}" method="GET">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-secondary">Mostrar Todes</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="pessoas-section">
+      <ul class="list-unstyled">
+        {% for pessoa in pessoas %}
+        <li>
+          <strong>Nome:</strong> {{ pessoa.nome }}<br>
+          <strong>Data de Nascimento:</strong> {{ pessoa.dataNasc }}<br>
+          <strong>Email:</strong> {{ pessoa.email }}<br>
+          <strong>País que deseja trabalhar:</strong> {{ pessoa.paisDesejado }}
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
